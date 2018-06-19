@@ -1,0 +1,11 @@
+<% include partials/header %>
+<h1>Update task</h1>
+
+<form action='/<%= update_item[0].task_id %>/update?_method=PUT' method="POST">
+	<input type="text" value="<%= update_item[0].task_name %>" name="name">
+	<input type="text" value="<%= update_item[0].task_description %>" name="description">
+	<input type="text" value="<%= update_item[0].task_type %>" name="type">
+	<button type="submit">Submit</button>
+</form>
+
+<% include partials/footer %>

@@ -1,0 +1,29 @@
+.newtask{
+	color:white;
+}
+
+.listheader{
+	font-size: 30px;
+}
+
+.lead{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.list-group-item{
+	padding: 5px;
+}
+
+.zbutton{
+	height: 15px;
+	margin: auto;
+}
+
+.inline{
+	display: inline;
+}
+
+.col-md-6{
+	height: 800px;
+}

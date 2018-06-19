@@ -1,10 +1,61 @@
-<h1>Hello there</h1>
-<ol>
-	<% for(var i=0; i < list.length; i++){ %>
-		<li>
-			<%- list[i] %>
-		</li>
-	<% } %>
+<% include partials/header %>
 
+<div class="container>"
+	<div class="row">
+		<div class="col-sm-12 col-md-6"
+			<p>
+				<h2 class="listheader">Daily tasks</h2>
+			</p>
+			<ul class="list-group">
+				<% for(var i=0; i < daily_list.length; i++){ %>
+					<li class="list-group-item">
+						<span class="lead"> 
+							<%- daily_list[i].task_name %>
+						</span>
+						<div class="pull-right">
+							<a href="/<%- daily_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
+								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
+							</a>
+							<form method="POST" action="/<%- daily_list[i].task_id %>/delete?_method=DELETE" class="inline"> 
+								<button type="submit" class="btn btn-sm btn-danger"><img class="zbutton" src="https://png.icons8.com/windows/50/ffffff/cancel.png"></button>
+							</form>
+						</div>
+						<div class=clearfix></div>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+		<div class="col-sm-12 col-md-6"
+			<p>
+				<h2 class="listheader">Weekly Tasks</h2>
+			</p>
+			<ul class="list-group">
+				<% for(var i=0; i < weekly_list.length; i++){ %>
+					<li class="list-group-item">
+						<span class="lead"> 
+							<%- weekly_list[i].task_name %>
+						</span>
+						<div class="pull-right">
+							<a href="/<%- weekly_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
+								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
+							</a>
+							<form method="POST" action="/<%- weekly_list[i].task_id %>/delete?_method=DELETE" class="inline"> 
+								<button type="submit" class="btn btn-sm btn-danger"><img class="zbutton" src="https://png.icons8.com/windows/50/ffffff/cancel.png"></button>
+							</form>
+						</div>
+						<div class=clearfix></div>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+		<p>
+			<h2>Long term tasks (review weekly)</h2>
+		</p>
+		<div>
+	</div>
+</div>
 
-</ol>
+<% include partials/footer %>
