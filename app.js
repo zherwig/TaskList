@@ -8,6 +8,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     expressSanitizer = require("express-sanitizer"),
     methodOverride = require("method-override");
+    moment = require("moment");
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,7 +19,7 @@ app.use(methodOverride('_method'));
 var connection =  mysql.createConnection({
 	host	:'localhost',
 	user	:'root',
-	database: 'task_list_test',
+	database: 'tasklist',
 	password: '$p1212h$'
 });
 
@@ -27,11 +28,11 @@ var connection =  mysql.createConnection({
 //
 
 app.get("/", function(req,res){
-	var qDaily = 'SELECT task_id, task_name, task_description, task_type FROM tasks WHERE task_type="daily"';
+	var qDaily = 'SELECT * FROM tasks WHERE task_type="daily"';
 	connection.query(qDaily, function (error, results){
 	if(error) throw error;
 	var daily_list = results;
-		var qWeekly = 'SELECT task_id, task_name, task_description, task_type FROM tasks WHERE task_type="weekly"';
+		var qWeekly = 'SELECT * FROM tasks WHERE task_type="weekly"';
 		connection.query(qWeekly, function (error, results){
 		if(error) throw error;
 		var weekly_list = results;
@@ -47,10 +48,13 @@ app.get("/new", function(req,res){
 });
 
 app.post("/new", function(req,res){
+	var now_date = moment().format('YYYY-MM-DD');
 	var task = {
 		"task_name" : req.body.name,
-		"task_description" : req.body.description,
-		"task_type" : req.body.type	
+		"task_text" : req.body.text,
+		"task_type" : req.body.type,
+		"task_status": req.body.status,
+		"task_date": now_date
 	}
 	connection.query('INSERT INTO tasks SET ?', task, function(err,result){
 		if(err) {
@@ -64,7 +68,7 @@ app.post("/new", function(req,res){
 
 app.get("/:id/update", function(req,res){
 	var id = req.params.id
-	var q1 = "SELECT task_id, task_name, task_description, task_type FROM tasks WHERE task_id='" + id + "'";
+	var q1 = "SELECT * FROM tasks WHERE task_id='" + id + "'";
 	connection.query(q1, function (error, results){
 	if(error) throw error;
 	var update_item = results;
@@ -74,10 +78,13 @@ app.get("/:id/update", function(req,res){
 
 app.put("/:id/update", function(req,res){
 	var id = {"task_id" : req.params.id}
+	var now_date = moment().format('YYYY-MM-DD');
 	var task = {
 		"task_name" : req.body.name,
-		"task_description" : req.body.description,
-		"task_type" : req.body.type	
+		"task_text" : req.body.text,
+		"task_type" : req.body.type,
+		"task_status": req.body.status,
+		"task_date": now_date	
 	}
 	connection.query('UPDATE tasks SET ? WHERE ?', [task,id], function(err,result){
 		if(err) {
