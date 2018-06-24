@@ -48,7 +48,6 @@ app.get("/new", function(req,res){
 });
 
 app.post("/new", function(req,res){
-	console.log(req.body)
 	var now_date = moment().format('YYYY-MM-DD');
 	var task = {
 		"task_name" : req.body.name,
@@ -61,7 +60,14 @@ app.post("/new", function(req,res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.redirect("/")
+			if(req.xhr){
+				newQ = "SELECT * FROM tasks WHERE task_id='" + result.insertId + "'";
+				connection.query(newQ, function(err,result){
+					res.json(result);
+				});
+			} else {
+				res.redirect("/");
+			}
 		}
 
 	});
