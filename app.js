@@ -48,6 +48,7 @@ app.get("/new", function(req,res){
 });
 
 app.post("/new", function(req,res){
+	console.log(req.body)
 	var now_date = moment().format('YYYY-MM-DD');
 	var task = {
 		"task_name" : req.body.name,

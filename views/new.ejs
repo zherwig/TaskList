@@ -1,28 +1,54 @@
 <% include partials/header %>
 
 <div class="row">
-	<div class="col-md6 col-md-offset-3">
+	<div class="col-md-6 col-md-offset-3">
 		<p>
 			<h2>New Task</h2>
 		</p>
 		<form action='/new' method="POST">
 			<div class="form-group">
-				<label>Task Name</label>
-				<input type="text" placeholder="Task Name" name="name">
+				<label for="taskname">Task Name</label>
+				<input type="text" placeholder="Task Name" name="name" id="taskname" class="form-control">
 			</div>
 			<div class="form-group">
-				<label>Notes</label>
-				<input type="text" placeholder="Task Note" name="text" class="notes">
+				<label for="tasknotes">Notes</label>
+				<textarea rows="5" placeholder="Task Note" name="text" id="tasknotes" class="form-control"></textarea>
 			</div>
 			<div class="form-group">
-				<label>Status</label>
-				<input type="text" placeholder="Task Type" name="status">
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-danger">
+						<input type="radio" name="status" value="priority" autocomplete="off">Priority
+					</label>
+					<label class="btn btn-primary active">
+						<input type="radio" name="status" value="normal" autocomplete="off" checked>Normal
+					</label>
+					<label class="btn btn-primary">
+						<input type="radio" name="status" value="hold" autocomplete="off">On Hold
+					</label>
+					<label class="btn btn-primary">
+						<input type="radio" name="status" value="done" autocomplete="off">Done
+					</label>
+				</div>
 			</div>
 			<div class="form-group">
-				<label>Task Type</label>
-				<input type="text" placeholder="Task Type" name="type">
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary active">
+						<input type="radio" name="type" value="daily" autocomplete="off" checked>Daily
+					</label>
+					<label class="btn btn-primary">
+						<input type="radio" name="type" value="weekly" autocomplete="off">Weekly
+					</label>
+					<label class="btn btn-primary">
+						<input type="radio" name="type" value="monthly" autocomplete="off">Monthly
+					</label>
+					<label class="btn btn-primary">
+						<input type="radio" name="type" value="delegated" ="off">Talia
+					</label>
+				</div>
 			</div>
-			<button type="submit">Submit</button>
+			<div class="form-group">
+				<button type="submit">Submit</button>
+			</div>
 		</form>
 	<div>
 <div>

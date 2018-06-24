@@ -1,31 +1,58 @@
 <% include partials/header %>
 
-<div> class="row">
-	<div class="col-md6 col-md-offset-3">
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
 		<p>
 			<h2>Update task</h2>
 		</p>
 		<p>
-			<h3>Last Updated: <%= update_item[0].task_date %></h3>
+			<h5>Last Updated: <%= update_item[0].task_date.toLocaleDateString(); %></h5>
 		</p>
 		<form action='/<%= update_item[0].task_id %>/update?_method=PUT' method="POST">
 			<div class="form-group">
-				<label>Task Name</label>
-				<input type="text" value="<%= update_item[0].task_name %>" name="name">
-			</div>
-			<div class="form-group notes">
-				<label>Notes</label>
-				<input type="text" value="<%= update_item[0].task_text %>" name="text" class="notes">
+				<label for="taskname">Task Name</label>
+				<input type="text" value="<%= update_item[0].task_name %>" name="name" id="taskname" class="form-control">
 			</div>
 			<div class="form-group">
-				<label>Status</label>
-				<input type="text" value="<%= update_item[0].task_status %>" name="status">
+				<label for="tasknotes">Notes</label>
+				<textarea rows="5" name="text" id="tasknotes" class="form-control"><%= update_item[0].task_text %></textarea>
 			</div>
 			<div class="form-group">
-				<label>Task Type</label>
-				<input type="text" value="<%= update_item[0].task_type %>" name="type">
+				<p> <%= update_item[0].task_status == "normal" %>
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-danger <% if(update_item[0].task_status === "priority"){%> active <% } %>">
+						<input type="radio" name="status" value="priority" autocomplete="off" <% if(update_item[0].task_status == "priority"){%> checked <% } %>>Priority
+					</label>
+					<label class="btn btn-primary <% if(update_item[0].task_status === "normal"){%> active <% } %>">
+						<input type="radio" name="status" value="normal" autocomplete="off" <% if(update_item[0].task_status == "normal"){%> checked <% } %>>Normal
+					</label>
+					<label class="btn btn-primary <% if(update_item[0].task_status === "hold"){%> active <% } %>">
+						<input type="radio" name="status" value="hold" autocomplete="off" <% if(update_item[0].task_status == "hold"){%> checked <% } %>>On Hold
+					</label>
+					<label class="btn btn-primary <% if(update_item[0].task_status === "done"){%> active <% } %>">
+						<input type="radio" name="status" value="done" autocomplete="off" <% if(update_item[0].task_status == "done"){%> checked <% } %>>Done
+					</label>
+				</div>
 			</div>
-			<button type="submit">Submit</button>
+			<div class="form-group">
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary <% if(update_item[0].task_type === "daily"){%>active <% } %>">
+						<input type="radio" name="type" value="daily" autocomplete="off" <% if(update_item[0].task_type == "daily"){%> checked <% } %>>Daily
+					</label>
+					<label class="btn btn-primary <% if(update_item[0].task_type === "weekly"){%>active <% } %>">
+						<input type="radio" name="type" value="weekly" autocomplete="off" <% if(update_item[0].task_type == "weekly"){%> checked <% } %>>Weekly
+					</label>
+					<label class="btn btn-primary <% if(update_item[0].task_type === "monthly"){%>active <% } %>">
+						<input type="radio" name="type" value="monthly" autocomplete="off" <% if(update_item[0].task_type == "monthly"){%> checked <% } %>>Monthly
+					</label>
+					<label class="btn btn-primary <% if(update_item[0].task_type === "delegated"){%>active <% } %>">
+						<input type="radio" name="type" value="delegated" ="off" <% if(update_item[0].task_type == "delegated"){%> checked <% } %>>Talia
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<button type="submit">Submit</button>
+			</div>
 		</form>
 	<div>
 <div>
