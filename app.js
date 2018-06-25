@@ -28,11 +28,11 @@ var connection =  mysql.createConnection({
 //
 
 app.get("/", function(req,res){
-	var qDaily = 'SELECT * FROM tasks WHERE task_type="daily"';
+	var qDaily = 'SELECT * FROM tasks WHERE task_type="daily" AND NOT task_status="done" ORDER BY task_status DESC';
 	connection.query(qDaily, function (error, results){
 	if(error) throw error;
 	var daily_list = results;
-		var qWeekly = 'SELECT * FROM tasks WHERE task_type="weekly"';
+		var qWeekly = 'SELECT * FROM tasks WHERE task_type="weekly" AND NOT task_status="done" ORDER BY task_status DESC';
 		connection.query(qWeekly, function (error, results){
 		if(error) throw error;
 		var weekly_list = results;
@@ -74,17 +74,19 @@ app.post("/new", function(req,res){
 });
 
 app.get("/:id/update", function(req,res){
+	var backURL = req.header('Referer') || '/';
 	var id = req.params.id
 	var q1 = "SELECT * FROM tasks WHERE task_id='" + id + "'";
 	connection.query(q1, function (error, results){
 	if(error) throw error;
 	var update_item = results;
-	res.render("edit.ejs", {update_item:update_item});
+	res.render("edit.ejs", {update_item:update_item, backURL:backURL});
 	});
 });
 
 app.put("/:id/update", function(req,res){
-	var id = {"task_id" : req.params.id}
+	var backURL = req.body.backURL
+	var id = {"task_id" : req.params.id};
 	var now_date = moment().format('YYYY-MM-DD');
 	var task = {
 		"task_name" : req.body.name,
@@ -97,7 +99,26 @@ app.put("/:id/update", function(req,res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.redirect("/")
+			res.redirect(backURL)
+		}
+
+	});
+});
+
+
+app.put("/:id/done", function(req,res){
+	var backURL = req.header('Referer') || '/';
+	var id = {"task_id" : req.params.id}
+	var now_date = moment().format('YYYY-MM-DD');
+	var task = {
+		"task_status": req.body.status,
+		"task_date": now_date	
+	}
+	connection.query('UPDATE tasks SET ? WHERE ?', [task,id], function(err,result){
+		if(err) {
+			console.log(err);
+		} else {
+			res.redirect(backURL)
 		}
 
 	});
@@ -109,11 +130,33 @@ app.delete("/:id/delete", function(req,res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.redirect("/")
+			res.redirect('/')
 		}
 
 	});
 });
+
+
+app.get("/done", function(req,res){
+	var qDone = 'SELECT * FROM tasks WHERE task_status="done" ORDER BY task_date, task_id DESC';
+	connection.query(qDone, function (error, results){
+	if(error) throw error;
+	var done_list = results;
+	res.render("done.ejs", {done_list:done_list})
+	});
+
+});
+
+app.get("/delegated", function(req,res){
+	var qDone = 'SELECT * FROM tasks WHERE task_type="delegated" AND NOT task_status="done" ORDER BY task_status DESC';
+	connection.query(qDone, function (error, results){
+	if(error) throw error;
+	var delegated_list = results;
+	res.render("delegated.ejs", {delegated_list:delegated_list})
+	});
+
+});
+
 
 //
 // LISTENER

@@ -39,7 +39,7 @@
 								<input type="radio" name="status" value="done" autocomplete="off">Done
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox hiddencheck">
 							<label><input type="checkbox" name="type" value="daily" checked>Daily</label>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 			</div>
 			<ul class="list-group" id="dailyToDos">
 				<% for(var i=0; i < daily_list.length; i++){ %>
-					<li class="list-group-item">
+					<li class="list-group-item <% if(daily_list[i].task_status == "hold") { %> dailyitemhold <% } %> <% if(daily_list[i].task_status == "priority") { %> priority <% } %>">
 						<span class="lead"> 
 							<%- daily_list[i].task_name %>
 						</span>
@@ -58,14 +58,18 @@
 							<a href="/<%- daily_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
 								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 							</a>
-							<form method="POST" action="/<%- daily_list[i].task_id %>/delete?_method=DELETE" class="inline"> 
-								<button type="submit" class="btn btn-sm btn-danger"><img class="zbutton" src="https://png.icons8.com/windows/50/ffffff/cancel.png"></button>
+							<form action='/<%= daily_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
+								<div class="checkbox hiddencheck">
+									<label><input type="checkbox" name="status" value="done" checked>Done</label>
+								</div>
+								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
 							</form>
 						</div>
 						<div class=clearfix></div>
 					</li>
 				<% } %>
 			</ul>
+			<button type="btn" id="unhideDaily">Show items on hold</button>
 		</div>
 		<div class="col-sm-12 col-md-6">
 			<div>
@@ -104,7 +108,7 @@
 								<input type="radio" name="status" value="done" autocomplete="off">Done
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox hiddencheck">
 							<label><input type="checkbox" name="type" value="weekly" checked>Weekly</label>
 						</div>
 					</div>
@@ -115,22 +119,26 @@
 			</div>
 			<ul class="list-group" id="weeklyToDos">
 				<% for(var i=0; i < weekly_list.length; i++){ %>
-					<li class="list-group-item">
+					<li class="list-group-item <% if(weekly_list[i].task_status == "hold") { %> weeklyitemhold <% } %> <% if(weekly_list[i].task_status == "priority") { %> priority <% } %>">
 						<span class="lead"> 
 							<%- weekly_list[i].task_name %>
 						</span>
 						<div class="pull-right">
-							<a href="/<%- weekly_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
+							<a href="/<%= weekly_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
 								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 							</a>
-							<form method="POST" action="/<%- weekly_list[i].task_id %>/delete?_method=DELETE" class="inline"> 
-								<button type="submit" class="btn btn-sm btn-danger"><img class="zbutton" src="https://png.icons8.com/windows/50/ffffff/cancel.png"></button>
+							<form action='/<%= weekly_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
+								<div class="checkbox hiddencheck">
+									<label><input type="checkbox" name="status" value="done" checked>Done</label>
+								</div>
+								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
 							</form>
 						</div>
 						<div class=clearfix></div>
 					</li>
 				<% } %>
 			</ul>
+			<button type="btn" id="unhideWeekly">Show items on hold</button>
 		</div>
 	</div>
 </div>

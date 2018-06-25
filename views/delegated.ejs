@@ -1,0 +1,77 @@
+<% include partials/header %>
+
+<div class="container>"
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-md-offset-3">
+			<div>
+				<div class="pull-right">
+					<button type="btn" id="newDelegatedButton">New Task</button>
+				</div>
+				<div>
+					<h2 class="listheader">Talia's tasks</h2>
+				</div>
+			</div>
+			
+			<div class="hideform" id="newDelegatedForm">
+				<div>
+					<h4>New Task for Talia</h4>
+				</div>
+				<form action="/new" method="POST" id="newDelegated">
+					<div class="form-group">
+						<label for="taskname">Task Name</label>
+						<input type="text" placeholder="Task Name" name="name" id="taskname" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="tasknotes">Notes</label>
+						<textarea rows="5" placeholder="Task Note" name="text" id="tasknotes" class="form-control"></textarea>
+					</div>
+					<div class="form-group">
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-danger btn-xs">
+								<input type="radio" name="status" value="priority" autocomplete="off">Priority
+							</label>
+							<label class="btn btn-primary active btn-xs">
+								<input type="radio" name="status" value="normal" autocomplete="off" checked>Normal
+							</label>
+							<label class="btn btn-primary btn-xs">
+								<input type="radio" name="status" value="hold" autocomplete="off">On Hold
+							</label>
+							<label class="btn btn-primary btn-xs">
+								<input type="radio" name="status" value="done" autocomplete="off">Done
+							</label>
+						</div>
+						<div class="checkbox hiddencheck">
+							<label><input type="checkbox" name="type" value="delegated" checked>Delegated</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit">Submit</button>
+					</div>
+				</form>
+			</div>
+
+
+			<ul class="list-group" id="delegatedToDos">
+				<% for(var i=0; i < delegated_list.length; i++){ %>
+					<li class="list-group-item <% if(delegated_list[i].task_status == "hold") { %> delegateditemhold <% } %> <% if(delegated_list[i].task_status == "priority") { %> priority <% } %>">
+						<span class="lead"> 
+							<%- delegated_list[i].task_name %>
+						</span>
+						<div class="pull-right">
+							<a href="/<%- delegated_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
+								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
+							</a>
+							<form action='/<%= delegated_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
+								<div class="checkbox hiddencheck">
+									<label><input type="checkbox" name="status" value="done" checked>Done</label>
+								</div>
+								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
+							</form>
+						</div>
+						<div class=clearfix></div>
+					</li>
+				<% } %>
+			</ul>
+			
+
+<% include partials/footer %>
