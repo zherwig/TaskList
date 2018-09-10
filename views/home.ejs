@@ -21,6 +21,10 @@
 						<input type="text" placeholder="Task Name" name="name" id="taskname" class="form-control">
 					</div>
 					<div class="form-group">
+						<label for="tasknotes">Next Action</label>
+						<textarea rows="2" placeholder="Next Action" name="nextaction" id="tasknextaction" class="form-control"></textarea>
+					</div>
+					<div class="form-group">
 						<label for="tasknotes">Notes</label>
 						<textarea rows="5" placeholder="Task Note" name="text" id="tasknotes" class="form-control"></textarea>
 					</div>
@@ -51,21 +55,26 @@
 			<ul class="list-group" id="dailyToDos">
 				<% for(var i=0; i < daily_list.length; i++){ %>
 					<li class="list-group-item <% if(daily_list[i].task_status == "hold") { %> dailyitemhold <% } %> <% if(daily_list[i].task_status == "priority") { %> priority <% } %>">
-						<span class="lead"> 
-							<%- daily_list[i].task_name %>
-						</span>
-						<div class="pull-right">
-							<a href="/<%- daily_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
-								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
-							</a>
-							<form action='/<%= daily_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
-								<div class="checkbox hiddencheck">
-									<label><input type="checkbox" name="status" value="done" checked>Done</label>
-								</div>
-								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
-							</form>
-						</div>
-						<div class=clearfix></div>
+						<div class="wrapper">	
+							<div class="floatr mainbuttons">
+								<a href="/<%- daily_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
+									<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
+								</a>
+								<form action='/<%= daily_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
+									<div class="checkbox hiddencheck">
+										<label><input type="checkbox" name="status" value="done" checked>Done</label>
+									</div>
+									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
+								</form>
+							</div>
+							<div class="lead"> 
+								<%- daily_list[i].task_name %>
+							</div>
+							<div class="nextaction"> 
+								<span><strong><em>Next action: </em></strong></span><%- daily_list[i].NextAction %>
+							</div>						
+						<div>		
+
 					</li>
 				<% } %>
 			</ul>
@@ -88,6 +97,10 @@
 					<div class="form-group">
 						<label for="taskname">Task Name</label>
 						<input type="text" placeholder="Task Name" name="name" id="taskname" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="tasknotes">Next Action</label>
+						<textarea rows="2" placeholder="Next Action" name="nextaction" id="tasknextaction" class="form-control"></textarea>
 					</div>
 					<div class="form-group">
 						<label for="tasknotes">Notes</label>
@@ -120,21 +133,25 @@
 			<ul class="list-group" id="weeklyToDos">
 				<% for(var i=0; i < weekly_list.length; i++){ %>
 					<li class="list-group-item <% if(weekly_list[i].task_status == "hold") { %> weeklyitemhold <% } %> <% if(weekly_list[i].task_status == "priority") { %> priority <% } %>">
-						<span class="lead"> 
-							<%- weekly_list[i].task_name %>
-						</span>
-						<div class="pull-right">
-							<a href="/<%= weekly_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
-								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
-							</a>
-							<form action='/<%= weekly_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
-								<div class="checkbox hiddencheck">
-									<label><input type="checkbox" name="status" value="done" checked>Done</label>
-								</div>
-								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
-							</form>
-						</div>
-						<div class=clearfix></div>
+						<div class="wrapper">	
+							<div class="floatr mainbuttons">
+								<a href="/<%- weekly_list[i].task_id %>/update" class="btn btn-sm btn-warning"> 
+									<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
+								</a>
+								<form action='/<%= weekly_list[i].task_id %>/done?_method=PUT' method="POST" class="inline">
+									<div class="checkbox hiddencheck">
+										<label><input type="checkbox" name="status" value="done" checked>Done</label>
+									</div>
+									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
+								</form>
+							</div>
+							<div class="lead"> 
+								<%- weekly_list[i].task_name %>
+							</div>
+							<div class="nextaction"> 
+								<span><strong><em>Next action: </em></strong></span><%- weekly_list[i].NextAction %>
+							</div>						
+						<div>		
 					</li>
 				<% } %>
 			</ul>

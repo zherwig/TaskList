@@ -33,11 +33,9 @@ $('#newDaily').submit(function(event){
 				$('#dailyToDos').append(
 					`
 					<li class="list-group-item dailyitemhold">
-							<span class="lead"> 
-								${data[0].task_name}
-							</span>
-							<div class="pull-right">
-								<a href="/${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
+						<div class="wrapper">	
+							<div class="floatr mainbuttons">
+								<a href="${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
 									<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 								</a>
 								<form action='/${data[0].task_id}/done?_method=PUT' method="POST" class="inline">
@@ -47,20 +45,23 @@ $('#newDaily').submit(function(event){
 									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
 								</form>
 							</div>
-							<div class=clearfix></div>
-						</li>
-
+							<div class="lead"> 
+								${data[0].task_name}
+							</div>
+							<div class="nextaction"> 
+								<span><strong><em>Next action: </em></strong></span>${data[0].NextAction}
+							</div>						
+						<div>	
+					</li>
 					`
 					)
 			} else if(data[0].task_status ==  "priority"){
 				$('#dailyToDos').append(
 					`
 					<li class="list-group-item priority">
-							<span class="lead"> 
-								${data[0].task_name}
-							</span>
-							<div class="pull-right">
-								<a href="/${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
+						<div class="wrapper">	
+							<div class="floatr mainbuttons">
+								<a href="${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
 									<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 								</a>
 								<form action='/${data[0].task_id}/done?_method=PUT' method="POST" class="inline">
@@ -70,8 +71,14 @@ $('#newDaily').submit(function(event){
 									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
 								</form>
 							</div>
-							<div class=clearfix></div>
-						</li>
+							<div class="lead"> 
+								${data[0].task_name}
+							</div>
+							<div class="nextaction"> 
+								<span><strong><em>Next action: </em></strong></span>${data[0].NextAction}
+							</div>						
+						<div>	
+					</li>
 
 					`
 					)
@@ -79,11 +86,9 @@ $('#newDaily').submit(function(event){
 				$('#dailyToDos').append(
 					`
 					<li class="list-group-item">
-							<span class="lead"> 
-								${data[0].task_name}
-							</span>
-							<div class="pull-right">
-								<a href="/${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
+						<div class="wrapper">	
+							<div class="floatr mainbuttons">
+								<a href="${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
 									<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 								</a>
 								<form action='/${data[0].task_id}/done?_method=PUT' method="POST" class="inline">
@@ -93,8 +98,14 @@ $('#newDaily').submit(function(event){
 									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
 								</form>
 							</div>
-							<div class=clearfix></div>
-						</li>
+							<div class="lead"> 
+								${data[0].task_name}
+							</div>
+							<div class="nextaction"> 
+								<span><strong><em>Next action: </em></strong></span>${data[0].NextAction}
+							</div>						
+						<div>	
+					</li>
 
 					`
 					)
@@ -115,11 +126,9 @@ $('#newWeekly').submit(function(event){
 				$('#weeklyToDos').append(
 					`
 					<li class="list-group-item weeklyitemhold">
-							<span class="lead"> 
-								${data[0].task_name}
-							</span>
-							<div class="pull-right">
-								<a href="/${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
+						<div class="wrapper">	
+							<div class="floatr mainbuttons">
+								<a href="${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
 									<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 								</a>
 								<form action='/${data[0].task_id}/done?_method=PUT' method="POST" class="inline">
@@ -129,30 +138,40 @@ $('#newWeekly').submit(function(event){
 									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
 								</form>
 							</div>
-							<div class=clearfix></div>
-						</li>
+							<div class="lead"> 
+								${data[0].task_name}
+							</div>
+							<div class="nextaction"> 
+								<span><strong><em>Next action: </em></strong></span>${data[0].NextAction}
+							</div>						
+						<div>	
+					</li>
 					`
 					)
 			} else if(data[0].task_status ==  "priority"){
 				$('#weeklyToDos').append(
 				`
 				<li class="list-group-item priority">
-						<span class="lead"> 
-							${data[0].task_name}
-						</span>
-						<div class="pull-right">
-							<a href="/${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
+					<div class="wrapper">	
+						<div class="floatr mainbuttons">
+							<a href="${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
 								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 							</a>
 							<form action='/${data[0].task_id}/done?_method=PUT' method="POST" class="inline">
-									<div class="checkbox hiddencheck">
-										<label><input type="checkbox" name="status" value="done" checked>Done</label>
-									</div>
-									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
-								</form>
+								<div class="checkbox hiddencheck">
+									<label><input type="checkbox" name="status" value="done" checked>Done</label>
+								</div>
+								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
+							</form>
 						</div>
-						<div class=clearfix></div>
-					</li>
+						<div class="lead"> 
+							${data[0].task_name}
+						</div>
+						<div class="nextaction"> 
+							<span><strong><em>Next action: </em></strong></span>${data[0].NextAction}
+						</div>						
+					<div>	
+				</li>
 
 				`
 				)
@@ -160,22 +179,26 @@ $('#newWeekly').submit(function(event){
 				$('#weeklyToDos').append(
 				`
 				<li class="list-group-item">
-						<span class="lead"> 
-							${data[0].task_name}
-						</span>
-						<div class="pull-right">
-							<a href="/${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
+					<div class="wrapper">	
+						<div class="floatr mainbuttons">
+							<a href="${data[0].task_id}/update" class="btn btn-sm btn-warning"> 
 								<img class="zbutton" src="https://png.icons8.com/ios-glyphs/50/ffffff/multi-edit.png">
 							</a>
 							<form action='/${data[0].task_id}/done?_method=PUT' method="POST" class="inline">
-									<div class="checkbox hiddencheck">
-										<label><input type="checkbox" name="status" value="done" checked>Done</label>
-									</div>
-									<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
-								</form>
+								<div class="checkbox hiddencheck">
+									<label><input type="checkbox" name="status" value="done" checked>Done</label>
+								</div>
+								<button type="submit" class="btn btn-sm btn-success"><img class="zbutton" src="https://png.icons8.com/metro/32/ffffff/checkmark.png"></button>
+							</form>
 						</div>
-						<div class=clearfix></div>
-					</li>
+						<div class="lead"> 
+							${data[0].task_name}
+						</div>
+						<div class="nextaction"> 
+							<span><strong><em>Next action: </em></strong></span>${data[0].NextAction}
+						</div>						
+					<div>	
+				</li>
 
 				`
 				)

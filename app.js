@@ -54,7 +54,8 @@ app.post("/new", function(req,res){
 		"task_text" : req.body.text,
 		"task_type" : req.body.type,
 		"task_status": req.body.status,
-		"task_date": now_date
+		"task_date": now_date,
+		"NextAction": req.body.nextaction
 	}
 	connection.query('INSERT INTO tasks SET ?', task, function(err,result){
 		if(err) {
@@ -93,7 +94,8 @@ app.put("/:id/update", function(req,res){
 		"task_text" : req.body.text,
 		"task_type" : req.body.type,
 		"task_status": req.body.status,
-		"task_date": now_date	
+		"task_date": now_date,
+		"NextAction": req.body.nextaction	
 	}
 	connection.query('UPDATE tasks SET ? WHERE ?', [task,id], function(err,result){
 		if(err) {
